@@ -8,14 +8,14 @@ public class Transformation {
 	public Transformation(Input i){
 		this.i=i;
 	}
-	public void transformInput(){
-		if(i.road_size<=50){
+	public Input transformInput(){
+		if(i.road_size<50){
 			i.refdeg_road[0]=0;
 			i.refdeg_road[1]=0;
 			i.refdeg_road[2]=(float)(50-i.road_size)/(50);
 			i.ref_value[0]="Low";
 		}
-		if(i.road_size>50 && i.road_size<=75){
+		if(i.road_size>=50 && i.road_size<75){
 			i.refdeg_road[0]=0;
 			i.refdeg_road[1]=(float)(75-i.road_size)/(75-50);
 			i.refdeg_road[2]=1-i.refdeg_road[1];
@@ -26,7 +26,7 @@ public class Transformation {
 				i.ref_value[0]="Low";
 			}
 		}
-		if(i.road_size>75 && i.road_size<=100){
+		if(i.road_size>=75 && i.road_size<100){
 			i.refdeg_road[0]=(float)(100-i.road_size)/(100-75);
 			i.refdeg_road[1]=1-i.refdeg_road[0];
 			i.refdeg_road[2]=0;
@@ -40,20 +40,32 @@ public class Transformation {
 		}
 		
 		
-		if(i.num_vehicle<=50){
+		if(i.num_vehicle<50){
 			i.refdeg_vehicle[0]=0;
 			i.refdeg_vehicle[1]=0;
 			i.refdeg_vehicle[2]=(float)(50-i.num_vehicle)/(50);
+			i.ref_value[1]="Low";
+			
 		}
-		if(i.num_vehicle>50 && i.num_vehicle<=75){
+		if(i.num_vehicle>=50 && i.num_vehicle<75){
 			i.refdeg_vehicle[0]=0;
 			i.refdeg_vehicle[1]=(float)(75-i.num_vehicle)/(75-50);
 			i.refdeg_vehicle[2]=1-i.refdeg_vehicle[1];
+			if(i.refdeg_road[1]>i.refdeg_road[2]){
+				i.ref_value[1]="Medium";
+			}else{
+				i.ref_value[1]="Low";
+			}
 		}
-		if(i.num_vehicle>75 && i.num_vehicle<=100){
+		if(i.num_vehicle>=75 && i.num_vehicle<100){
 			i.refdeg_vehicle[0]=(float)(100-i.num_vehicle)/(100-75);
 			i.refdeg_vehicle[1]=1-i.refdeg_vehicle[0];
 			i.refdeg_vehicle[2]=0;
+			if(i.refdeg_road[0]>i.refdeg_road[1]){
+				i.ref_value[0]="High";
+			}else{
+				i.ref_value[0]="Medium";
+			}
 		
 		}
 		
@@ -61,11 +73,15 @@ public class Transformation {
 		if(i.busy_hour.equalsIgnoreCase("Yes")){
 			i.refdeg_busy[0]=1.0f;
 			i.refdeg_busy[1]=0;
+			i.ref_value[2]="Yes";
 		}
 		if(i.busy_hour.equalsIgnoreCase("No")){
 			i.refdeg_busy[0]=0f;
 			i.refdeg_busy[1]=1.0f;
+			i.ref_value[2]="No";
 		}
+		i.consolidateData();
+		return i;
 	}
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
