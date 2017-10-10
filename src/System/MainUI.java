@@ -3,6 +3,7 @@ package System;
 import java.awt.FlowLayout;
 import java.awt.Font;
 
+import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -13,7 +14,7 @@ public class MainUI extends JFrame {
 	public MainUI(){
 		JFrame f=new JFrame("Traffic Congestion Control");
 		f.setLocation(350, 100);
-		f.setSize(500, 600);
+		f.setSize(550, 600);
 		f.setLayout(null);
 		
 		JLabel title=new JLabel("Traffic Congestion Control");
@@ -47,6 +48,17 @@ public class MainUI extends JFrame {
 		tlabel3.addItem("Yes");
 		tlabel3.addItem("No");
 		
+		JButton enter=new JButton("Enter");
+		enter.setBounds(250, 450, 80, 30);
+		
+		JButton blabel1=new JButton("Input Transformation");
+		blabel1.setBounds(50,500, 130, 30);
+		
+		JButton blabel2=new JButton("Rule Activation");
+		blabel2.setBounds(220, 500, 130, 30);
+		
+		JButton blabel3=new JButton("Belief Update");
+		blabel3.setBounds(380, 500, 130, 30);
 		
 		f.add(title);
 		f.add(label1);
@@ -55,6 +67,10 @@ public class MainUI extends JFrame {
 		f.add(tlabel1);
 		f.add(tlabel2);
 		f.add(tlabel3);
+		f.add(enter);
+		f.add(blabel1);
+		f.add(blabel2);
+		f.add(blabel3);
 		
 		
 		f.setVisible(true);
