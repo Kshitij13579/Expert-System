@@ -62,9 +62,9 @@ public class Transformation {
 			i.refdeg_vehicle[1]=1-i.refdeg_vehicle[0];
 			i.refdeg_vehicle[2]=0;
 			if(i.refdeg_road[0]>i.refdeg_road[1]){
-				i.ref_value[0]="High";
+				i.ref_value[1]="High";
 			}else{
-				i.ref_value[0]="Medium";
+				i.ref_value[1]="Medium";
 			}
 		
 		}

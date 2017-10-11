@@ -18,7 +18,6 @@ public class TransformationUI extends JFrame {
 	Transformation transform;
 	public TransformationUI(Input i){
 		JFrame f=new JFrame("Input Transformation");
-		f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		f.setLayout(null);
 		f.setLocation(250,200);
 		f.setSize(900, 300);

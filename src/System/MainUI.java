@@ -68,7 +68,7 @@ public class MainUI extends JFrame implements ActionListener{
 		blabel2=new JButton("Rule Activation");
 		blabel2.setBounds(220, 500, 130, 30);
 		
-		blabel3=new JButton("Belief Update");
+		blabel3=new JButton("Rule Matching");
 		blabel3.setBounds(380, 500, 130, 30);
 		
 		f.add(title);
@@ -83,6 +83,7 @@ public class MainUI extends JFrame implements ActionListener{
 		f.add(blabel2);
 		f.add(blabel3);
 		
+		blabel3.addActionListener(this);
 		blabel1.addActionListener(this);
 		enter.addActionListener(this);
 		
@@ -101,6 +102,9 @@ public class MainUI extends JFrame implements ActionListener{
 		}
 		if(e.getSource()==blabel1){
 			new TransformationUI(i);
+		}
+		if(e.getSource()==blabel3){
+			new RuleMatchingUI(i);
 		}
 	}
 
