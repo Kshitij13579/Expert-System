@@ -9,7 +9,7 @@ public class Transformation {
 		this.i=i;
 	}
 	public Input transformInput(){
-		if(i.road_size<50){
+		if(i.road_size>0 && i.road_size<50){
 			i.refdeg_road[0]=0;
 			i.refdeg_road[1]=0;
 			i.refdeg_road[2]=(float)(50-i.road_size)/(50);
@@ -17,8 +17,8 @@ public class Transformation {
 		}
 		if(i.road_size>=50 && i.road_size<75){
 			i.refdeg_road[0]=0;
-			i.refdeg_road[1]=(float)(75-i.road_size)/(75-50);
-			i.refdeg_road[2]=1-i.refdeg_road[1];
+			i.refdeg_road[2]=(float)(75-i.road_size)/(75-50);
+			i.refdeg_road[1]=1-i.refdeg_road[2];
 			
 			if(i.refdeg_road[1]>i.refdeg_road[2]){
 				i.ref_value[0]="Medium";
@@ -27,8 +27,8 @@ public class Transformation {
 			}
 		}
 		if(i.road_size>=75 && i.road_size<100){
-			i.refdeg_road[0]=(float)(100-i.road_size)/(100-75);
-			i.refdeg_road[1]=1-i.refdeg_road[0];
+			i.refdeg_road[1]=(float)(100-i.road_size)/(100-75);
+			i.refdeg_road[0]=1-i.refdeg_road[1];
 			i.refdeg_road[2]=0;
 			
 			if(i.refdeg_road[0]>i.refdeg_road[1]){
@@ -40,7 +40,7 @@ public class Transformation {
 		}
 		
 		
-		if(i.num_vehicle<50){
+		if(i.num_vehicle>0 && i.num_vehicle<50){
 			i.refdeg_vehicle[0]=0;
 			i.refdeg_vehicle[1]=0;
 			i.refdeg_vehicle[2]=(float)(50-i.num_vehicle)/(50);
@@ -49,19 +49,19 @@ public class Transformation {
 		}
 		if(i.num_vehicle>=50 && i.num_vehicle<75){
 			i.refdeg_vehicle[0]=0;
-			i.refdeg_vehicle[1]=(float)(75-i.num_vehicle)/(75-50);
-			i.refdeg_vehicle[2]=1-i.refdeg_vehicle[1];
-			if(i.refdeg_road[1]>i.refdeg_road[2]){
+			i.refdeg_vehicle[2]=(float)(75-i.num_vehicle)/(75-50);
+			i.refdeg_vehicle[1]=1-i.refdeg_vehicle[2];
+			if(i.refdeg_vehicle[1]>i.refdeg_vehicle[2]){
 				i.ref_value[1]="Medium";
 			}else{
 				i.ref_value[1]="Low";
 			}
 		}
 		if(i.num_vehicle>=75 && i.num_vehicle<100){
-			i.refdeg_vehicle[0]=(float)(100-i.num_vehicle)/(100-75);
-			i.refdeg_vehicle[1]=1-i.refdeg_vehicle[0];
+			i.refdeg_vehicle[1]=(float)(100-i.num_vehicle)/(100-75);
+			i.refdeg_vehicle[0]=1-i.refdeg_vehicle[1];
 			i.refdeg_vehicle[2]=0;
-			if(i.refdeg_road[0]>i.refdeg_road[1]){
+			if(i.refdeg_vehicle[0]>i.refdeg_vehicle[1]){
 				i.ref_value[1]="High";
 			}else{
 				i.ref_value[1]="Medium";

@@ -80,9 +80,9 @@ public class MainUI extends JFrame implements ActionListener{
 		f.add(tlabel3);
 		f.add(enter);
 		f.add(blabel1);
-		f.add(blabel2);
 		f.add(blabel3);
 		
+		blabel2.addActionListener(this);
 		blabel3.addActionListener(this);
 		blabel1.addActionListener(this);
 		enter.addActionListener(this);

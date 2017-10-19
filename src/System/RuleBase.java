@@ -99,13 +99,39 @@ public class RuleBase {
 	
 	public ArrayList<Float> match(Input inp){
 		ArrayList<Float> signal=new ArrayList<Float>();
-		for(int i=0;i<rules.size();i++){
-			if(inp.ref_value[0].equalsIgnoreCase(rules.get(i).getRoad_size()) && inp.ref_value[1].equalsIgnoreCase(rules.get(i).getNum_vehicle()) && inp.ref_value[2].equalsIgnoreCase(rules.get(i).getBusy_hour())){
-				signal.add(rules.get(i).getRed());
-				signal.add(rules.get(i).getYellow());
-				signal.add(rules.get(i).getGreen());
+		float[] sum=new float[3];
+		if(inp.road_size==-1){
+			for(int i=0;i<rules.size();i++){
+				if(inp.ref_value[1].equalsIgnoreCase(rules.get(i).getNum_vehicle()) && inp.ref_value[2].equalsIgnoreCase(rules.get(i).getBusy_hour())){
+					sum[0]=sum[0]+rules.get(i).getRed();
+					sum[1]=sum[1]+rules.get(i).getYellow();
+					sum[2]=sum[2]+rules.get(i).getGreen();
+				}
+			}
+			signal.add(sum[0]/3);
+			signal.add(sum[1]/3);
+			signal.add(sum[2]/3);
+		}else if(inp.num_vehicle==-1){
+			for(int i=0;i<rules.size();i++){
+				if(inp.ref_value[0].equalsIgnoreCase(rules.get(i).getRoad_size()) && inp.ref_value[2].equalsIgnoreCase(rules.get(i).getBusy_hour())){
+					sum[0]=sum[0]+rules.get(i).getRed();
+					sum[1]=sum[1]+rules.get(i).getYellow();
+					sum[2]=sum[2]+rules.get(i).getGreen();
+				}
+			}
+			signal.add(sum[0]/3);
+			signal.add(sum[1]/3);
+			signal.add(sum[2]/3);
+		}else{
+			for(int i=0;i<rules.size();i++){
+				if(inp.ref_value[0].equalsIgnoreCase(rules.get(i).getRoad_size()) && inp.ref_value[1].equalsIgnoreCase(rules.get(i).getNum_vehicle()) && inp.ref_value[2].equalsIgnoreCase(rules.get(i).getBusy_hour())){
+					signal.add(rules.get(i).getRed());
+					signal.add(rules.get(i).getYellow());
+					signal.add(rules.get(i).getGreen());
+				}
 			}
 		}
+		
 		return signal;
 		
 	}
@@ -113,7 +139,7 @@ public class RuleBase {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		RuleBase r=new RuleBase();
-		Input i=new Input(60, 60, "Yes");
+		Input i=new Input(-1, 70, "Yes");
 		Transformation t=new Transformation(i);
 		i=t.transformInput();
 		ArrayList<Float> l=r.match(i);
